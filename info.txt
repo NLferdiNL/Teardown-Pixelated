@@ -1,0 +1,4 @@
+name = Pixelated
+author = NLferdiNL
+description = [noupload]Pixelate your Teardown experience.
+tags = Gameplay
