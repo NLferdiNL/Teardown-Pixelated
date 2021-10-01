@@ -22,12 +22,8 @@ function menu_init()
 end
 
 function menu_tick(dt)
-	if InputPressed(binds["Open_Menu"]) and not textboxClass_anyInputActive() and rebinding == nil then
-		menuOpened = not menuOpened
-		
-		if not menuOpened then
-			menuCloseActions()
-		end
+	if PauseMenuButton(toolReadableName .. " Settings") then
+		menuOpened = true
 	end
 	
 	if menuOpened and not menuOpenLastFrame then
