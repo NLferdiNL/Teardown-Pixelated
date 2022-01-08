@@ -37,6 +37,7 @@ function draw()
 		
 		if UiTextButton("Save and exit", 200, 50) then
 			saveKeyBinds()
+			saveFloatValues()
 			Menu()
 		end
 		
