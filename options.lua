@@ -28,10 +28,24 @@ function draw()
 		
 		UiButtonImageBox("ui/common/box-outline-6.png", 6, 6)
 		
-		if UiTextButton("Reset to default", 200, 50) then
-			-- DEFAULTS
-			resetKeybinds()
+		UiPush()
+		if resettingBinds > 0 then
+			UiColor(1, 0, 0, 1)
+			if UiTextButton("Are you sure?", 200, 50) then
+				resetKeybinds()
+				resolutionBox.value = 50
+				resettingBinds = 0
+			end
+		else
+			if UiTextButton("Reset to default", 200, 50) then
+				resettingBinds = 5
+			end
 		end
+		UiPop()
+		
+		--[[if UiTextButton("Reset to default", 200, 50) then
+			resettingBinds = 5
+		end]]--
 		
 		UiTranslate(0, 60)
 		
@@ -65,25 +79,6 @@ function draw()
 		setupTextBoxes()
 		
 		UiPush()
-			UiButtonImageBox("ui/common/box-outline-6.png", 6, 6)
-			
-			if resettingBinds > 0 then
-				UiColor(1, 0, 0, 1)
-				if UiTextButton("Are you sure?") then
-					resetKeybinds()
-					resettingBinds = 0
-				end
-			else
-				if UiTextButton("Reset Keybinds") then
-					resettingBinds = 5
-				end
-			end
-		UiPop()
-		
-		UiTranslate(0, 50)
-		
-		UiPush()
-			UiTranslate(0, 50)
 			for i = 1, #bindOrder do
 				local id = bindOrder[i]
 				local key = binds[id]
@@ -92,7 +87,7 @@ function draw()
 			end
 		UiPop()
 		
-		UiTranslate(0, 50 * (#bindOrder + 1))
+		UiTranslate(0, 50 * #bindOrder)
 		
 		textboxClass_render(resolutionBox)
 	UiPop()
